@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zhousanfu.github.io</id>
     <title>周三甫的博客</title>
-    <updated>2021-05-12T07:42:51.712Z</updated>
+    <updated>2021-05-21T01:05:37.569Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zhousanfu.github.io"/>
     <link rel="self" href="https://zhousanfu.github.io/atom.xml"/>
@@ -411,14 +411,32 @@ X.columns[sfs_selector.get_support()]
 <li>技术博客：https://zhousanfu.github.io</li>
 <li>Github：https://github.com/zhousanfu (有原创repo)</li>
 </ul>
+<hr>
 <h1 id="工作经历"><strong>工作经历</strong></h1>
-<h2 id="佛山市哈啰信息技术服务有限公司-2019年7月~2021年5月"><strong>佛山市哈啰信息技术服务有限公司（ 2019年7月～2021年5月 ）</strong></h2>
-<p>用户举报的内容进行分析，文本特征、语义分析、行为特征、人工智能自然语言处理等手段推进文字监控自动化；定期提供业务分析报告，搭建数据指标监控报表，并实时优化，为决策者/部门leader提供业务数据分析报告，并为其提供决策支持；</p>
+<h2 id="佛山哈啰信息技术服务有限公司-2019年7月~2021年5月"><strong>佛山哈啰信息技术服务有限公司（ 2019年7月～2021年5月 ）</strong></h2>
+<ul>
+<li>负责各类数据平台的搭建及系统开发实现和系统间接口数据标准规范制定;</li>
+<li>大数据分析、处理、挖掘等系统的设计和开发和构建基于用户行为特征的平台化画像服务能力，并建立用户画像产品的评估机制和监控体系;</li>
+<li>参与项目的技术攻坚和优化，相关系统的架构设计和评审，以及对问题的跟踪和解决;</li>
+</ul>
+<hr>
 <h1 id="项目"><strong>项目</strong></h1>
-<h3 id="nlp模型"><strong>NLP模型</strong></h3>
-<p>基于BERT与Tensorflow RNN的文本二分类与多分类模型，独立负责训练数据提取预处理、建模、训练、预测、调参优化、API服务部署。了解NLP的基本相关知识，和多语言在不同神经网络中的效果。准确率在一定数据范围内达95%以上。</p>
-<h3 id="色情网站检测-nsfw">色情网站检测-nsfw</h3>
-<p>通过计算链接当中色情图片占比，包含重定向跳转链接网址。在这个项目学习到CV相关的一些知识。</p>
+<h3 id="网络舆情监控">网络舆情监控</h3>
+<p>根据信息的语料库与报警监控信息库进行分析及告警，以确保信息的舆论健康发展；自动抽取的能准确代表文章主题思想的智能摘要，以快速了解文章大意与核心内容，提高用户信息利用效率。</p>
+<ul>
+<li>Django、爬虫、情感分析、分词</li>
+</ul>
+<h3 id="文本语义分类模型">文本语义分类<strong>模型</strong></h3>
+<ul>
+<li>基于BERT与Tensorflow RNN的文本二分类与多分类模型，独立负责训练数据提取预处理、建模、训练、预测、调参优化、API服务部署；准确率在一定数据范围内达95%以上。使用方向：新闻分类，数据分析预处理、内容审核；</li>
+<li>Tensorflow、NLP</li>
+</ul>
+<h3 id="色情链接检测">色情链接检测</h3>
+<ul>
+<li>自动识别社交产品内生产的违规链接内容，减少产品风险；</li>
+<li>图像分割cv模型</li>
+</ul>
+<hr>
 <h1 id="开源项目和作品">开源项目和作品</h1>
 <h2 id="开源项目">开源项目</h2>
 <ul>
@@ -434,13 +452,13 @@ X.columns[sfs_selector.get_support()]
 <ul>
 <li>hive核心与实际运用：<a href="https://github.com/zhousanfu/zhousanfu.github.io/blob/main/images/hive%E6%A0%B8%E5%BF%83%E4%B8%8E%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8.jpg?raw=true">内容地址</a></li>
 </ul>
+<hr>
 <h1 id="技能清单"><strong>技能清单</strong></h1>
 <ul>
-<li>编程语言：Java/Python/HTML&amp;CSS/Javascript</li>
-<li>框架：Django/Tensorflow/Scrapy</li>
-<li>其他：Linux/Git/Mysql/Oracle/Hive/Hadoop</li>
-<li>版本管理、自动化部署工具：Git/brew/conda</li>
-<li>数据库相关：Mysql/Oracle/Hive/Hadoop</li>
+<li>编程语言：Java、Python、Javascript、Html</li>
+<li>框架：Django、Flask、Tensorflow、Scrap</li>
+<li>操作系统与数据库：Linux、Mysql、Oracle、Hive、Hadoop、spark、BI</li>
+<li>版本管理、自动化部署工具：Git、Conda、Docker</li>
 </ul>
 ]]></content>
     </entry>
