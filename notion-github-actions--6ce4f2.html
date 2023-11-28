@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>Notion Github Actions 自动备份&nbsp;|&nbsp;Notablog</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="Notion Github Actions 自动备份">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>About</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">Notion Github Actions 自动备份</h1>
+    
+      <div class="DateTagBar">
+        
+          <span class="DateTagBar__Item DateTagBar__Date">Posted on Tue, Nov 28, 2023</span>
+        
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/6ce4f23bc389444c86dc8924418cc67a" class="PageRoot"><h3 id="https://www.notion.so/dfb06b62b5d447288777cb0b50d4311c" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/dfb06b62b5d447288777cb0b50d4311c"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">获取 Notion 相关的 token</strong></span></span></h3><div id="https://www.notion.so/4f023decb0174f5cb5f74627e8a3bed3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">因为 Notion 官方目前没有 API 支持导出备份整个空间, 所以需要从 Cookie 中获取相关值来实现自动备份.</span></span></p></div><h3 id="https://www.notion.so/f1446ae9ad794921b9272bb0758f3c13" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/f1446ae9ad794921b9272bb0758f3c13"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">token_v2</strong></span></span></h3><div id="https://www.notion.so/ff9c448af3454e9dbb1900d552dccaaf" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2Fce4c129a-db40-497a-bb5c-343d11e10b6d%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103647.png?width=1438&amp;table=block&amp;id=ff9c448a-f345-4e9d-bb19-00d552dccaaf"><img src="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2Fce4c129a-db40-497a-bb5c-343d11e10b6d%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103647.png?width=1438&amp;table=block&amp;id=ff9c448a-f345-4e9d-bb19-00d552dccaaf" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/cc5efe6491744db1bf1fbddae475c915" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/cc5efe6491744db1bf1fbddae475c915"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">space_id</strong></span></span></h3><div id="https://www.notion.so/a9fb4426c9044b6ca5df29d234b496d8" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2F1bdf3639-a2a9-41c9-b8ac-666ab59c49ac%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103740.png?width=1105&amp;table=block&amp;id=a9fb4426-c904-4b6c-a5df-29d234b496d8"><img src="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2F1bdf3639-a2a9-41c9-b8ac-666ab59c49ac%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103740.png?width=1105&amp;table=block&amp;id=a9fb4426-c904-4b6c-a5df-29d234b496d8" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/6ee5a9a968754529a553430877f622d8" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/07f322b8d87d4638981a71035c1ea86f" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/07f322b8d87d4638981a71035c1ea86f"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">file_token</strong></span></span></h3><div id="https://www.notion.so/e5d9c59920bf4960af6ef3b033955fee" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">找个页面点击导出</span></span></p></div><div id="https://www.notion.so/1d0b3e7c19dc4d19bff1e537d7e0e0e1" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2Fe80c8cc4-39e2-47a1-9940-88f71db76e74%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103614.png?width=1296&amp;table=block&amp;id=1d0b3e7c-19dc-4d19-bff1-e537d7e0e0e1"><img src="https://www.notion.so/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fad5c762d-1715-44ba-87e6-ff9256c8380e%2Fe80c8cc4-39e2-47a1-9940-88f71db76e74%2F%25E5%25B1%258F%25E5%25B9%2595%25E6%2588%25AA%25E5%259B%25BE_2023-11-27_103614.png?width=1296&amp;table=block&amp;id=1d0b3e7c-19dc-4d19-bff1-e537d7e0e0e1" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/16903cac1eaf4d7489686b349ab91ef7" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/66cab6d68571400e9d969feeafb2f3f8" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/74c5534b06f44fe7aac8d5930ef7bfc9" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/74c5534b06f44fe7aac8d5930ef7bfc9"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">使用 Github Actions 自动备份</strong></span></span></h3><div id="https://www.notion.so/7ba6272ed1b14fe6b93134936e9b6bbd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">仓库一定要选 Private, 不然就公开啦!</span></span></p></div><div id="https://www.notion.so/476029599e9b4bbfa82bb203dbd5f130" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/d0aeb8a7ebdc429ca358c10e376c1cad" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">新建后点击 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Setting —&gt; Actions —&gt; General</strong></span><span class="SemanticString">, 往下滚动找到图中的权限配置, 设置默认权限为可读可写 (如图所示):</span></span></p></div><div id="https://www.notion.so/c24bdc24936249ab92a9fc7d78552c0a" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/826511bd4ef642eead9f1c27c515b941" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">还是这个页面, 点击 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Secrets and variables —&gt; Actions</strong></span><span class="SemanticString">, 如图添加三项 Secret, 分别对应上面鼓捣到的三个小东西:</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/5b50797774df457692d76717807adb50" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">NOTION_TOKEN</code></span><span class="SemanticString"> 填上面的 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">token_v2</code></span></span></li><li id="https://www.notion.so/22fff46ff60b4680aec1985c136bac45" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">NOTION_SPACE_ID</code></span><span class="SemanticString"> 填上面的 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">space_id</code></span></span></li><li id="https://www.notion.so/55e22632e6a347ae8408855f6e4bbc79" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">NOTION_FILE_TOKEN</code></span><span class="SemanticString"> 填上面的 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">file_token</code></span></span></li></ul><div id="https://www.notion.so/69553d7c46a3447b99834662ee8f80d0" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/3cae5f596a164605a91dc8f3b700a120" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">最后一步, 打开 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Actions</strong></span><span class="SemanticString"> 标签页, 点击 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Simple workflow</strong></span><span class="SemanticString"> 的 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Configure</strong></span><span class="SemanticString"> 按钮创建一个任务:</span></span></p></div><div id="https://www.notion.so/f1b71da2c2de4e19af795d284525aafb" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/6f1e936887574c9ba3890223a18f4e28" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">清空默认的代码, 复制下面的内容, 粘贴到文件里:</span></span></p></div><pre id="https://www.notion.so/b8b5e56323b94c6d817d1c6d8488874f" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">"Notion backup"</span>
+
+<span class="token key atrule">on</span><span class="token punctuation">:</span>
+  <span class="token key atrule">push</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branches</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> master
+  <span class="token key atrule">schedule</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span>   <span class="token key atrule">cron</span><span class="token punctuation">:</span> <span class="token string">"0 */4 * * *"</span>
+
+  <span class="token comment"># Allows you to run this workflow manually from the Actions tab</span>
+  <span class="token key atrule">workflow_dispatch</span><span class="token punctuation">:</span>
+
+<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">backup</span><span class="token punctuation">:</span>
+    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> Backup
+    <span class="token key atrule">timeout-minutes</span><span class="token punctuation">:</span> <span class="token number">15</span>
+    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v3
+
+      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>node@v2
+        <span class="token key atrule">with</span><span class="token punctuation">:</span>
+          <span class="token key atrule">node-version</span><span class="token punctuation">:</span> <span class="token string">'18'</span>
+
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Delete previous backup
+        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token key atrule">rm -rf markdown html*.zip- name</span><span class="token punctuation">:</span> Setup dependencies
+        <span class="token key atrule">run</span><span class="token punctuation">:</span> npm install <span class="token punctuation">-</span>g notion<span class="token punctuation">-</span>backup
+
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Run backup
+        <span class="token key atrule">run</span><span class="token punctuation">:</span> notion<span class="token punctuation">-</span>backup
+        <span class="token key atrule">env</span><span class="token punctuation">:</span>
+          <span class="token key atrule">NOTION_TOKEN</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.NOTION_TOKEN <span class="token punctuation">}</span><span class="token punctuation">}</span>
+          <span class="token key atrule">NOTION_FILE_TOKEN</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.NOTION_FILE_TOKEN <span class="token punctuation">}</span><span class="token punctuation">}</span>
+          <span class="token key atrule">NOTION_SPACE_ID</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.NOTION_SPACE_ID <span class="token punctuation">}</span><span class="token punctuation">}</span>
+          <span class="token key atrule">NODE_OPTIONS</span><span class="token punctuation">:</span> <span class="token string">"--max-http-header-size 15000"</span>
+
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Delete zips
+        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+          rm -f *.zip
+          rm -f markdown/*-Part*.zip
+          rm -f html/*-Part*.zip</span>
+
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Commit changes
+        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Automated snapshot"
+          git push</span></span></span></span></code></pre><div id="https://www.notion.so/b11db982021942099a28fef1bb621673" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/ad074e5724434ddab7d8fb8e50fa7ef1" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/ff05e35784e740aeb37b225c1242cc9e" class="Image Image--PageWidth"><figure><a href="#?width=640"><img src="#?width=640" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div></article>
+  <footer class="Footer">
+  <div>&copy; Notablog 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
