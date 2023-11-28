@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: npm i -g notablog && notablog generate .
       - name: Deploy
-        uses: actions/jekyll-build-pages@v1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           repository-name: zhousanfu/zhousanfu.github.io
